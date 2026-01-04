@@ -29,13 +29,16 @@ const prompt = ai.definePrompt({
   name: 'generateCelebrationAnimationPrompt',
   input: {schema: GenerateCelebrationAnimationInputSchema},
   output: {schema: GenerateCelebrationAnimationOutputSchema},
-  prompt: `You are a creative assistant helping to generate a personalized celebration message for a user who has accepted a proposal.
+  prompt: `You are a creative assistant tasked with writing a joyful and heartfelt celebration message.
+The message is for {{{userName}}}, who has just accepted a marriage proposal from {{{proposerName}}}.
 
-  The user's name is: {{{userName}}}.
-  The proposer's name is: {{{proposerName}}}.
+Please craft a message that is:
+- Extremely happy and celebratory.
+- Short and impactful (2-3 sentences).
+- Personalized with their names.
+- Expresses the beginning of a beautiful journey together.
 
-  Create a short, joyful, and heartfelt celebration message that acknowledges their acceptance.
-  The message should express excitement and happiness.
+Example tone: "And so the adventure begins! Congratulations, [userName] and [proposerName]! Wishing you a lifetime of love and laughter."
 `,
 });
 
