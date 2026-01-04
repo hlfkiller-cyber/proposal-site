@@ -93,12 +93,13 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'float': {
-          '0%': { transform: 'translateY(0px)', opacity: '0.7' },
+          '0%': { transform: 'translateY(0px) rotate(0deg)', opacity: '0.7' },
           '50%': { opacity: '1' },
-          '100%': { transform: 'translateY(-100vh)', opacity: '0' },
+          '100%': { transform: 'translateY(-120vh) rotate(360deg)', opacity: '0' },
         },
         'confetti-fall': {
           '0%': { transform: 'translateY(-10%) rotateZ(0deg)', opacity: '1' },
+          '75%': { opacity: '1' },
           '100%': { transform: 'translateY(110vh) rotateZ(720deg)', opacity: '0' },
         },
         'gradient-flow': {

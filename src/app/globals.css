@@ -4,65 +4,65 @@
 
 @layer base {
   :root {
-    --background: 28 56% 95%; /* Light Peach */
-    --foreground: 300 10% 25%; /* Dark purple-ish gray */
+    --background: 330 100% 98%; /* Light Pink */
+    --foreground: 330 30% 25%; /* Dark Plum */
 
-    --card: 28 56% 95%;
-    --card-foreground: 300 10% 25%;
+    --card: 330 100% 98%;
+    --card-foreground: 330 30% 25%;
 
-    --popover: 28 56% 95%;
-    --popover-foreground: 300 10% 25%;
+    --popover: 330 100% 98%;
+    --popover-foreground: 330 30% 25%;
 
-    --primary: 300 26% 80%; /* A slightly darker Dusty Rose for buttons */
-    --primary-foreground: 300 10% 15%;
+    --primary: 340 80% 85%; /* Soft Rose */
+    --primary-foreground: 330 30% 15%;
 
-    --secondary: 240 60% 96%; /* A slightly darker Soft Lavender */
-    --secondary-foreground: 300 10% 15%;
+    --secondary: 330 60% 96%; /* Lighter Pink */
+    --secondary-foreground: 330 30% 15%;
 
-    --muted: 240 60% 96%;
-    --muted-foreground: 300 10% 45%;
+    --muted: 330 60% 96%;
+    --muted-foreground: 330 30% 45%;
 
-    --accent: 240 67% 97%; /* Soft Lavender */
-    --accent-foreground: 300 10% 15%;
+    --accent: 340 90% 97%; /* Pale Rose */
+    --accent-foreground: 330 30% 15%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 300 10% 88%;
-    --input: 300 10% 88%;
-    --ring: 300 26% 80%;
+    --border: 330 30% 88%;
+    --input: 330 30% 88%;
+    --ring: 340 80% 85%;
     
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 300 10% 10%;
-    --foreground: 28 56% 95%;
+    --background: 330 30% 10%;
+    --foreground: 330 100% 98%;
 
-    --card: 300 10% 10%;
-    --card-foreground: 28 56% 95%;
+    --card: 330 30% 10%;
+    --card-foreground: 330 100% 98%;
 
-    --popover: 300 10% 10%;
-    --popover-foreground: 28 56% 95%;
+    --popover: 330 30% 10%;
+    --popover-foreground: 330 100% 98%;
 
-    --primary: 300 26% 70%;
-    --primary-foreground: 300 10% 10%;
+    --primary: 340 80% 75%;
+    --primary-foreground: 330 30% 10%;
 
-    --secondary: 240 10% 20%;
-    --secondary-foreground: 28 56% 95%;
+    --secondary: 330 20% 20%;
+    --secondary-foreground: 330 100% 98%;
 
-    --muted: 240 10% 20%;
-    --muted-foreground: 28 56% 80%;
+    --muted: 330 20% 20%;
+    --muted-foreground: 330 100% 80%;
 
-    --accent: 240 10% 25%;
-    --accent-foreground: 28 56% 95%;
+    --accent: 340 25% 25%;
+    --accent-foreground: 330 100% 98%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 20%;
-    --ring: 300 26% 70%;
+    --border: 330 20% 20%;
+    --input: 330 20% 20%;
+    --ring: 340 80% 75%;
   }
 }
 
@@ -81,5 +81,45 @@
     background: linear-gradient(-45deg, hsl(var(--accent)), hsl(var(--background)), hsl(var(--secondary)), hsl(var(--primary) / 0.5));
     background-size: 400% 400%;
     animation: gradient-flow 25s ease infinite;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10%) rotateZ(0deg);
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
