@@ -7,7 +7,6 @@ import { Expression } from '@/components/proposal/Expression';
 import { Question } from '@/components/proposal/Question';
 import FloatingElements from '@/components/animations/FloatingElements';
 import Confetti from '@/components/animations/Confetti';
-import { handleYes, handleNo, handleInstagram } from '@/app/actions';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/proposal/SectionWrapper';
 import { PasswordPrompt } from '@/components/proposal/PasswordPrompt';
@@ -19,7 +18,7 @@ export default function Home() {
   const [step, setStep] = useState<Step>('password');
   const [responseType, setResponseType] = useState<ResponseType>(null);
   const [responseMessage, setResponseMessage] = useState('');
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const handleCorrectPassword = () => {
     setStep('intro');
@@ -31,32 +30,39 @@ export default function Home() {
     else if (step === 'expression') setStep('question');
   };
 
-  const onYes = () => {
+  const handleResponse = async (response: 'Yes' | 'No' | 'Instagram') => {
     startTransition(async () => {
-      setStep('response');
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ response }),
+        });
+      } catch (error) {
+        console.error('Failed to send email:', error);
+      }
+    });
+
+    setStep('response');
+
+    if (response === 'Yes') {
       setResponseType('yes');
       setResponseMessage("You just made my world brighter 💖");
-      await handleYes();
-    });
-  };
-
-  const onNo = () => {
-    startTransition(async () => {
-      setStep('response');
+    } else if (response === 'No') {
       setResponseType('no');
       setResponseMessage('Thank you for being honest. I still wish you happiness 🌸');
-      await handleNo();
-    });
-  };
-
-  const onInstagram = () => {
-    startTransition(async () => {
-      setStep('response');
+    } else {
       setResponseType('instagram');
       setResponseMessage("Okay… I’ll be waiting for your message on Instagram 😊");
-      await handleInstagram();
-    });
+    }
   };
+
+  const onYes = () => handleResponse('Yes');
+  const onNo = () => handleResponse('No');
+  const onInstagram = () => handleResponse('Instagram');
+
 
   const renderStep = () => {
     switch (step) {
