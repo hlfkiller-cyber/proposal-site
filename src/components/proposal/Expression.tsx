@@ -42,6 +42,9 @@ export function Expression({ onContinue }: ExpressionProps) {
             It’s the way you talk, the way you think, the way you exist.
           </motion.p>
           <motion.p variants={itemVariants} className="text-lg md:text-xl max-w-2xl mb-4">
+            I love your Dara , your Voice and everything that your are or have.
+          </motion.p>
+          <motion.p variants={itemVariants} className="text-lg md:text-xl max-w-2xl mb-4">
             I care about your happiness, your dreams, and your peace.
           </motion.p>
           <motion.p variants={itemVariants} className="text-lg md:text-xl max-w-2xl mb-8 italic">
