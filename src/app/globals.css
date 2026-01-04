@@ -75,3 +75,11 @@
     background-color: hsl(var(--background));
   }
 }
+
+@layer utilities {
+  .bg-gradient-animation {
+    background: linear-gradient(-45deg, hsl(var(--accent)), hsl(var(--background)), hsl(var(--secondary)), hsl(var(--primary) / 0.5));
+    background-size: 400% 400%;
+    animation: gradient-flow 25s ease infinite;
+  }
+}

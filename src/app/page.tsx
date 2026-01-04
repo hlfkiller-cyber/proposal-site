@@ -10,6 +10,7 @@ import Confetti from '@/components/animations/Confetti';
 import { handleYes, handleNo, handleInstagram } from '@/app/actions';
 import { generateCelebrationAnimation } from '@/ai/flows/generate-celebration-animation';
 import { Loader2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/proposal/SectionWrapper';
 
 type Step = 'intro' | 'reflection' | 'expression' | 'question' | 'response';
@@ -75,12 +76,17 @@ export default function Home() {
       case 'response':
         return (
           <SectionWrapper>
-            <div className="text-center z-10 flex flex-col items-center">
+            <motion.div 
+              className="text-center z-10 flex flex-col items-center"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
               {isPending && responseType === 'yes' && <Loader2 className="animate-spin mb-4" size={48} />}
               <h2 className="text-3xl md:text-5xl font-headline font-bold max-w-3xl leading-tight">
                 {responseMessage}
               </h2>
-            </div>
+            </motion.div>
           </SectionWrapper>
         );
       default:
@@ -89,12 +95,22 @@ export default function Home() {
   };
 
   return (
-    <main className="relative bg-background">
+    <main className="relative bg-background overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-animation" />
       <FloatingElements />
       {responseType === 'yes' && <Confetti />}
-      <div className="relative z-10">
-        {renderStep()}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={step}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          className="relative z-10"
+        >
+          {renderStep()}
+        </motion.div>
+      </AnimatePresence>
     </main>
   );
 }

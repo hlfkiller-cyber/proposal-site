@@ -1,5 +1,6 @@
+"use client";
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type SectionWrapperProps = {
   children: React.ReactNode;
@@ -8,11 +9,18 @@ type SectionWrapperProps = {
 
 export function SectionWrapper({ children, className }: SectionWrapperProps) {
   return (
-    <section className={cn(
-      "min-h-screen w-full flex flex-col items-center justify-center p-8 relative animate-fade-in",
-      className
-    )}>
-      {children}
-    </section>
+    <motion.section 
+      className={cn(
+        "min-h-screen w-full flex flex-col items-center justify-center p-8 relative",
+        className
+      )}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
+      <AnimatePresence>
+        {children}
+      </AnimatePresence>
+    </motion.section>
   );
 }
