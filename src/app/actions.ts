@@ -26,7 +26,7 @@ async function sendResponseEmail(subject: string, body: string) {
 }
 
 export async function handleYes() {
-  const subject = "Response Received: YES 💕";
+  const subject = "Congratulations – She Said YES 💕";
   const body = "She said yes! Congratulations!";
   console.log("==================================");
   console.log(subject);
@@ -37,7 +37,7 @@ export async function handleYes() {
 }
 
 export async function handleNo() {
-  const subject = "Response Received: NO";
+  const subject = "Response Received – No";
   const body = "Response was no. Reaching out might be a good idea.";
   console.log("==================================");
   console.log(subject);
@@ -48,7 +48,7 @@ export async function handleNo() {
 }
 
 export async function handleInstagram() {
-  const subject = "Response Received: INSTAGRAM 📩";
+  const subject = "Response Received – INSTAGRAM 📩";
   const body = "She will respond on Instagram. Keep an eye on your DMs!";
   console.log("==================================");
   console.log(subject);

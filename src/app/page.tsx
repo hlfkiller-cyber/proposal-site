@@ -8,8 +8,6 @@ import { Question } from '@/components/proposal/Question';
 import FloatingElements from '@/components/animations/FloatingElements';
 import Confetti from '@/components/animations/Confetti';
 import { handleYes, handleNo, handleInstagram } from '@/app/actions';
-import { generateCelebrationAnimation } from '@/ai/flows/generate-celebration-animation';
-import { Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/proposal/SectionWrapper';
 
@@ -20,7 +18,7 @@ export default function Home() {
   const [step, setStep] = useState<Step>('intro');
   const [responseType, setResponseType] = useState<ResponseType>(null);
   const [responseMessage, setResponseMessage] = useState('');
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const handleContinue = () => {
     if (step === 'intro') setStep('reflection');
@@ -32,16 +30,8 @@ export default function Home() {
     startTransition(async () => {
       setStep('response');
       setResponseType('yes');
-      setResponseMessage('Generating a special message for you...');
-      
+      setResponseMessage("You just made my world brighter 💖");
       await handleYes();
-      try {
-        const result = await generateCelebrationAnimation({ userName: 'Samikshya', proposerName: 'Nitish' });
-        setResponseMessage(result.celebrationMessage);
-      } catch (error) {
-        console.error("AI generation failed:", error);
-        setResponseMessage("You just made my world brighter 💖");
-      }
     });
   };
 
@@ -82,7 +72,6 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              {isPending && responseType === 'yes' && <Loader2 className="animate-spin mb-4" size={48} />}
               <h2 className="text-3xl md:text-5xl font-headline font-bold max-w-3xl leading-tight">
                 {responseMessage}
               </h2>
