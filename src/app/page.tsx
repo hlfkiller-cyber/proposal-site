@@ -10,15 +10,20 @@ import Confetti from '@/components/animations/Confetti';
 import { handleYes, handleNo, handleInstagram } from '@/app/actions';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/proposal/SectionWrapper';
+import { PasswordPrompt } from '@/components/proposal/PasswordPrompt';
 
-type Step = 'intro' | 'reflection' | 'expression' | 'question' | 'response';
+type Step = 'password' | 'intro' | 'reflection' | 'expression' | 'question' | 'response';
 type ResponseType = 'yes' | 'no' | 'instagram' | null;
 
 export default function Home() {
-  const [step, setStep] = useState<Step>('intro');
+  const [step, setStep] = useState<Step>('password');
   const [responseType, setResponseType] = useState<ResponseType>(null);
   const [responseMessage, setResponseMessage] = useState('');
   const [, startTransition] = useTransition();
+
+  const handleCorrectPassword = () => {
+    setStep('intro');
+  };
 
   const handleContinue = () => {
     if (step === 'intro') setStep('reflection');
@@ -55,6 +60,8 @@ export default function Home() {
 
   const renderStep = () => {
     switch (step) {
+      case 'password':
+        return <PasswordPrompt onCorrectPassword={handleCorrectPassword} />;
       case 'intro':
         return <Introduction onContinue={handleContinue} />;
       case 'reflection':
